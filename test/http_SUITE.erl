@@ -541,7 +541,7 @@ connect_request(Config) ->
 		Transport, "localhost", ?config(port, Config), Client),
 	Data = "CONNECT fake.domain.com:80 HTTP/1.1\r\nHost: fake.domain.com\r\n\r\n",
 	{ok, Client3} = cowboy_client:raw_request(Data, Client2),
-	{ok, 200, _, Client4} = cowboy_client:response(Client2),
+	{ok, 200, _, Client4} = cowboy_client:response(Client3),
 	{ok, <<"CONNECTfake.domain.com">>, _} = cowboy_client:response_body(Client4).
 
 connect_nohost(Config) ->
@@ -551,7 +551,7 @@ connect_nohost(Config) ->
 		Transport, "localhost", ?config(port, Config), Client),
 	Data = "CONNECT fake.domain.com:80 HTTP/1.1\r\n\r\n",
 	{ok, Client3} = cowboy_client:raw_request(Data, Client2),
-	{ok, 200, _, Client4} = cowboy_client:response(Client2),
+	{ok, 200, _, Client4} = cowboy_client:response(Client3),
 	{ok, <<"CONNECTfake.domain.com">>, _} = cowboy_client:response_body(Client4).
 
 %% Check if sending requests whose size is around the MTU breaks something.

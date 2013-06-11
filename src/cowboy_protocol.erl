@@ -224,7 +224,7 @@ parse_uri(Buffer, State, Method) ->
 parse_connect_host(<< C, Rest/bits >>, State, Method, SoFar) ->
     case C of
         $\r -> error_terminate(400, State);
-        $\s -> parse_version(Rest, State, Method, <<>>, <<>>, <<>>, [{<<"host">>, SoFar}]);
+        $\s -> parse_version(Rest, State, Method, <<>>, <<>>, [{<<"host">>, SoFar}]);
         _ -> parse_connect_host(Rest, State, Method, << SoFar/binary, C >>)
     end.
 
